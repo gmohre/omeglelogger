@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+    <style>
+        body{
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+<canvas id="chatRendered"></canvas>
+<script type=text/javascript src="{{
+  url_for('static', filename='jQuery.js') }}"></script>
+<script type=text/javascript>
+   $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+ <script src="/static/chatToCanvas.js"></script>
+<script type=text/javascript>
+	var chatData ;
+  $(function() {
+    $(document).ready(function() {
+      $.getJSON($SCRIPT_ROOT + '/get_conversation/'+'coffee/'+'1',{}, 
+      	function(data) {
+        console.log(data);
+        chatData = data;
+        renderChat(data);
+      });
+      return false;
+    });
+  });
+</script>
+
+</body>
+</html>
