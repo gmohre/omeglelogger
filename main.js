@@ -1,6 +1,6 @@
-console.log("Melissa Greene is Running!");
 $("document").ready(function(){
-    
+
+  var chatLog = [];  
 
   var accessTokenInput, prevValue, value, failCount;
     failCount = 0;
@@ -8,30 +8,38 @@ $("document").ready(function(){
 window.init(accessTokenInput);
   setInterval(function(){
     value =  "" + $(".strangermsg")[$(".strangermsg").length-1].lastChild.innerHTML;
+      
+      /*Check if response is not empty and not the same as the previous*/
       if(value != undefined && value != prevValue){
+          //Reset Fail Count
           failCount = 0;
-                  console.log("User: "+value);
-                 prevValue = value;
-            sendText(value)
-              .then(function(response) {
-                var result;
-                try {
-                  result = response.result.fulfillment.speech
-                } catch(error) {
-                  result = "";
-                }
-                //setResponseJSON(response);
-                setResponseOnNode(result);
-              })
-              .catch(function(err) {
-                //setResponseJSON(err);
-                setResponseOnNode("Something goes wrong");
-              });
+          console.log("User: "+value);
+          prevValue = value;
+          //Push response to the log
+          pushResponse(value, "User");
+          //Send response to AI.API
+          sendText(value).then(function(response) {
+            var result;
+            try {
+                result = response.result.fulfillment.speech
+            } catch(error) {
+                result = "";
+            }
+            //setResponseJSON(response);
+            setResponseOnNode(result);
+            })
+            .catch(function(err) {
+            //setResponseJSON(err);
+            setResponseOnNode("?");
+            });
     }else{
         failCount = failCount + 1;
     }
+      
     if(failCount >= 10){
+        //Reset the fail count
         failCount = 0;
+        endChat("NoResponse");
         console.warn("Disconnecting!");
         $('.disconnectbtn').click();
         setTimeout(function(){
@@ -45,10 +53,15 @@ window.init(accessTokenInput);
       console.info("Bot: "+response);
     $('.chatmsg').val(response);
     $('.sendbtn').click();
+    pushResponse(response, "Bot");
   }
     
-function saveChat(){
+function endChat(reasonForEnd){
+     
+}
     
+function pushResponse(textReponse, authorIs){
+   chatLog.push(authorIs+": "+textReponse);
 }
 
 });
