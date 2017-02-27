@@ -20,7 +20,7 @@ var renderChat = function(chatEntry){
     ctx.font =  fontSize+"px Arial";
     
     var currentPos = fontSize/2 + fontMargin*2;
-    for(var i=0; i < chatSplit.length.numLines; i++){
+    for(var i=0; i < chatSplit.length; i++){
         ctx.fillText(chatSplit[i], fontMargin, (currentPos+fontMargin));
         currentPos = currentPos+lineHeight;
     }
