@@ -1,0 +1,14 @@
+{
+  "name": "OmegleLogger",
+  "description": "",
+  "version": "1.0",
+  "manifest_version": 2,
+"permissions": ["http://www.omegle.com/"],
+      "content_scripts": [
+    {
+      "matches": ["http://www.omegle.com/*"],
+      "js": ["jQuery.js", "ApiAi.js", "demoFunctions.js", "main.js"],
+    "css": ["style.css"]
+    }
+  ]
+}
