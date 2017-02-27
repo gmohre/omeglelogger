@@ -1,8 +1,12 @@
+<canvas id="chatRendered" width="100px" height="100px">
+
 {{id}}
 {{topic}}
 {{timestamp}}:{{numResponses}}
+{% set lineCounter = 3}
 {% set chatLines = text.split('\n') %}
-
 {% for response in chatLines %}
+	{% set lineCounter = lineCounter + 1 %}
 	<li>{{response}}</li>
 {% endfor %}
+</canvas>
