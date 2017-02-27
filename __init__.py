@@ -2,10 +2,14 @@ from flask import Flask
 import os
 import jinja2
 from flask import jsonify
+from flask import render_template
+
 import json
+
 
 app = Flask(__name__)
 FILE_TEMPLATE = '%(id)s_%(topic)s'
+
 def render(tpl_path, context):
     path, filename = os.path.split(tpl_path)
     return jinja2.Environment(
@@ -13,16 +17,11 @@ def render(tpl_path, context):
     ).get_template(filename).render(context)
 
 @app.route("/")
-def hello():
-    return "Hello World!"
+def home():
+	return render_template('chatToCanvas.html')
 
-#@app.route("/store_conversation")
-#def storeConversation(conversation):
-#	pass
-	#Write conversation to disk, throw exception on fail
-
-@app.route("/get_conversation")
-def getConversation(id=1, topic="coffee"):
+@app.route("/get_conversation/<topic>/<id>")
+def getConversation(topic, id):
 	filename = FILE_TEMPLATE % dict(id=id, topic=topic)
 	with open(filename) as data_file:
 	    data = json.loads(data_file.read())
@@ -30,14 +29,16 @@ def getConversation(id=1, topic="coffee"):
 
 
 
-@app.route("/render_conversation")
-def renderConversation():
-	conversation = {'timestamp':1,'numResponses':1, 'text':"hey\nyou\nguy", 'topic':"coffee", 'id':1}
+@app.route("/render_conversation/<topic>/<id>")
+def renderConversation(topic, id):
+	text = "hey\nyou\nguy"
+	numLines = str.count(text, "\n") + 1
+	conversation = {'timestamp':1,'numLines':numLines, 'text':text, 'topic':"coffee", 'id':1}
 	filename = FILE_TEMPLATE % conversation
 	jsonData = jsonify(conversation)
 	with open(filename, 'w') as outfile:
 		json.dump(conversation, outfile)
-	return jsonData
+	return "Rendered %s to disk at %s" %(conversation['text'], filename)
 
 
 if __name__ == "__main__":

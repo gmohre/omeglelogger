@@ -7,13 +7,10 @@ var renderChat = function(chatEntry){
     var fontMargin = (lineHeight-fontSize)/2;
     var canvas = document.getElementById("chatRendered");
     var ctx = canvas.getContext("2d");
+        
+    var chatSplit = chatEntry.text.split("/n");
     
-    
-    obj = JSON.parse(chatEntry);
-    
-    var chatSplit = obj.text.split("/n");
-    
-    ctx.canvas.height = lineHeight*chatSplit.length;
+    ctx.canvas.height = lineHeight*chatEntry.numLines;
     ctx.canvas.width = 800;
     
     ctx.fillStyle = backgroundColor;
@@ -23,11 +20,10 @@ var renderChat = function(chatEntry){
     ctx.font =  fontSize+"px Arial";
     
     var currentPos = fontSize/2 + fontMargin*2;
-    for(var i=0; i < chatSplit.length; i++){
+    for(var i=0; i < chatSplit.length.numLines; i++){
         ctx.fillText(chatSplit[i], fontMargin, (currentPos+fontMargin));
         currentPos = currentPos+lineHeight;
     }
     
 }
-                     
-renderChat('{"text":"Hello/nWorld/nTest/nTest2"}');
+                    
