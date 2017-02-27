@@ -1,0 +1,8 @@
+{{id}}
+{{topic}}
+{{timestamp}}:{{numResponses}}
+{% set chatLines = text.split('\n') %}
+
+{% for response in chatLines %}
+	<li>{{response}}</li>
+{% endfor %}
