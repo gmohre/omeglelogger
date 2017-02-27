@@ -47,6 +47,8 @@ window.init(accessTokenInput);
     $('.sendbtn').click();
   }
     
-function saveChat
+function saveChat(){
+    
+}
 
 });
