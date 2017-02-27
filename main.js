@@ -1,5 +1,6 @@
 $("document").ready(function(){
-
+  var API_URL = 'http://localhost:5000';
+  var RENDER_PATH = '/render_conversation'
   var chatLog = [];  
 
   var accessTokenInput, prevValue, value, failCount;
@@ -57,7 +58,7 @@ window.init(accessTokenInput);
   }
     
 function endChat(reasonForEnd){
-     
+  api_url = API_URL + RENDER_PATH + '/' + topic + "/" + id     
 }
     
 function pushResponse(textReponse, authorIs){

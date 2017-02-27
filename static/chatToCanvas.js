@@ -8,9 +8,9 @@ var renderChat = function(chatEntry){
     var canvas = document.getElementById("chatRendered");
     var ctx = canvas.getContext("2d");
         
-    var chatSplit = chatEntry.text.split("/n");
-    
-    ctx.canvas.height = lineHeight*chatEntry.numLines;
+    var chatSplit = chatEntry.text.split("big");
+    console.log(chatSplit.length);
+    ctx.canvas.height = lineHeight*chatSplit.length;
     ctx.canvas.width = 800;
     
     ctx.fillStyle = backgroundColor;
@@ -21,9 +21,12 @@ var renderChat = function(chatEntry){
     
     var currentPos = fontSize/2 + fontMargin*2;
     for(var i=0; i < chatSplit.length; i++){
+        console.log(chatSplit[i]);
+        console.log(currentPos+fontMargin);
         ctx.fillText(chatSplit[i], fontMargin, (currentPos+fontMargin));
         currentPos = currentPos+lineHeight;
     }
+    return chatSplit
     
 }
                     

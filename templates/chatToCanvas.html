@@ -19,13 +19,14 @@
  <script src="/static/chatToCanvas.js"></script>
 <script type=text/javascript>
 	var chatData ;
+	var chatSplit;
   $(function() {
     $(document).ready(function() {
       $.getJSON($SCRIPT_ROOT + '/get_conversation/'+'coffee/'+'1',{}, 
       	function(data) {
         console.log(data);
         chatData = data;
-        renderChat(data);
+        chatSplit = renderChat(data);
       });
       return false;
     });

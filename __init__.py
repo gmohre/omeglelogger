@@ -5,7 +5,7 @@ from flask import jsonify
 from flask import render_template
 
 import json
-
+AI_API_TOKEN = 'f80986b59b974a2e84bae8cdf67d0497'
 
 app = Flask(__name__)
 FILE_TEMPLATE = '%(id)s_%(topic)s'
@@ -19,6 +19,9 @@ def render(tpl_path, context):
 @app.route("/")
 def home():
 	return render_template('chatToCanvas.html')
+@app_route("get_from_omegle")
+def get_from_omegle():
+
 
 @app.route("/get_conversation/<topic>/<id>")
 def getConversation(topic, id):
@@ -31,7 +34,7 @@ def getConversation(topic, id):
 
 @app.route("/render_conversation/<topic>/<id>")
 def renderConversation(topic, id):
-	text = "hey\nyou\nguy"
+	text = "heybigyoubigguy"
 	numLines = str.count(text, "\n") + 1
 	conversation = {'timestamp':1,'numLines':numLines, 'text':text, 'topic':"coffee", 'id':1}
 	filename = FILE_TEMPLATE % conversation
