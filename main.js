@@ -4,11 +4,7 @@ $("document").ready(function(){
 
   var accessTokenInput, prevValue, value, failCount;
     failCount = 0;
-
-
-    //accessTokenInput = 'fc1eff951a80458aa9abd43446f15b9a'; //Classic
-    //accessTokenInput = '98057b00400a40ad94b492e9ca0bf45d'; //Doggo Meme
-    accessTokenInput = '140ce55f98b14aaabc3b24ff3d0cad41'; //Experimental
+    accessTokenInput = 'f80986b59b974a2e84bae8cdf67d0497'; //API Key
 window.init(accessTokenInput);
   setInterval(function(){
     value =  "" + $(".strangermsg")[$(".strangermsg").length-1].lastChild.innerHTML;
